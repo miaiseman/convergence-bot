@@ -6,6 +6,13 @@ __pycache__/
 # C extensions
 *.so
 
+# files
+enwiki-latest.json.gz
+glove.42B.300d.zip
+glove.6B.zip
+glove.6B/
+glove.840B.300d.zip
+
 # Distribution / packaging
 .Python
 build/
