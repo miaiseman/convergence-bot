@@ -1,0 +1,2 @@
+*.pkl filter=lfs diff=lfs merge=lfs -text
+finalized_model.pkl filter=lfs diff=lfs merge=lfs -text
