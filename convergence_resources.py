@@ -1,3 +1,12 @@
+import pandas as pd 
+import numpy as np  
+import random 
+from sklearn.metrics.pairwise import cosine_similarity
+import nltk
+from nltk.stem import WordNetLemmatizer
+
+#import the things used in the functions too??? 
+
 def converge(user_input=str, bot_input=str, exclude=None):
     """Return the "average word" of the input words."""
     if exclude is None:
@@ -21,7 +30,7 @@ def play_round(user_input, user_history=None, bot_history=None):
     if bot_history is None:
         user_history = []
         bot_history = []
-        bot_response = random.choice(lemmas[:])
+        bot_response = random.choice(valid_lemmas[:2000])
     else:
         bot_response = converge(user_history[-1], bot_history[-1], 
                                 exclude=set(user_history + bot_history))
@@ -34,7 +43,7 @@ def play_round(user_input, user_history=None, bot_history=None):
     }
 
 
-play_convergence(round_results=None):
+def play_convergence(round_results=None):
     """Play a game of Convergence."""
     print("Let's play Convergence. Type any word!") 
     while True: 
@@ -59,16 +68,7 @@ play_convergence(round_results=None):
             if user_response in bot_history or user_response in user_history: 
                 print(f"Looks like one of us has already said {user_response}. Choose a different word.")
             elif user_response in model.keys():  
-#             #first round:
-#             if round_results is None:
-#                 bot_history = None 
-#                 user_history = None
-#             #rounds with history
-#             else: 
-#                 bot_history = round_results['bot_history']
-#                 user_history = round_results['user_history']
-                #make sure the word hasn't been said already 
-                #call the function that plays a round
+
                 round_results = play_round(user_response, user_history, bot_history)    
                 if user_response != round_results['bot_response']:
                     print(f"You said {user_response}, but I said {round_results['bot_response']}.")
