@@ -12,11 +12,13 @@ def load_model(filename):
     return any_model
 
 def make_model():
-    global model
+    """Make the pre-trained word vectors dictionary."""
+    global model #is this correct/necessary? 
     model = load_model('pre_trained_model.pkl')
     return model 
 
 def make_cwv():
+    """Make the bot's response word vectors dictionary."""
     global common_word_vectors
     common_word_vectors = load_model('common_word_vectors.pkl')
     return common_word_vectors
