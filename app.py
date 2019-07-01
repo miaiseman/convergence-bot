@@ -1,21 +1,14 @@
-import pickle
+import convergence_resources as cr
 from flask import Flask, request, render_template, jsonify
-#all old code below: 
-with open('model.pkl', 'rb') as f:
-    model = pickle.load(f)
-app = Flask(__name__, static_url_path="")
 
 @app.route('/') 
 def index():
     """Return the main page."""
-    return render_template('doppel.html')
+    return render_template('convergence.html')
 
-@app.route('/predict', methods=['GET', 'POST'])
-def predict():
-    """Return a character image."""
-    data = request.json
-    extraction = ImageFeatureExtractor()
-    features_for_web = extraction.transform([data['user_input']])
-    prediction = model.predict(features_for_web)
-    return jsonify({'prediction': prediction[0]})
+
+@app.route('/play', methods=['GET', 'POST'])
+def play_online():
+    """Start a game of Covnergence."""
+    return cr.play_convergence ()
 
