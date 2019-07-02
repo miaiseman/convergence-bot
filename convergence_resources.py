@@ -13,17 +13,15 @@ def load_model(filename):
 
 def make_model():
     """Make the pre-trained word vectors dictionary."""
-    global model #is this correct/necessary? 
     model = load_model('pre_trained_model.pkl')
     return model 
 
 def make_cwv():
     """Make the bot's response word vectors dictionary."""
-    global common_word_vectors
     common_word_vectors = load_model('common_word_vectors.pkl')
     return common_word_vectors
   
-def converge(model, common_word_vectors, user_input=str, bot_input=str, exclude=None):
+def converge(model, common_word_vectors, user_input, bot_input, exclude=None):
     """Return the "average word" of the input words."""
     
     if exclude is None:
@@ -41,9 +39,11 @@ def converge(model, common_word_vectors, user_input=str, bot_input=str, exclude=
     bot_response = cos_sim_dict[max_cos_sim]
     return bot_response
 
-def play_round(model, user_input, user_history=None, bot_history=None):
+def play_round(model, common_word_vectors, user_input, user_history=None, bot_history=None):
     """Play a round of Convergence."""
-    common_word_vectors = make_cwv()
+    user_input = user_input.lower()
+    if user_input not in model: # check for invalid word  
+        return {'error': f"Is {user_input} an English word? I don't know it. Choose a different word."}
     if bot_history is None:
         user_history = []
         bot_history = []
@@ -57,15 +57,22 @@ def play_round(model, user_input, user_history=None, bot_history=None):
         'user_history': user_history,
         'bot_history': bot_history,
         'bot_response': bot_response,
+        
     }
 
+
+#^^ add error dictionaries for logic below 
+#
+
+#can look at this later 
 def play_convergence(round_results=None):
     """Play a game of Convergence."""
     print("Let's play Convergence! \nThe game starts with two random words - "
           "one from you and one from the computer. The goal is to converge upon the same word" 
           " without repeating any words from a previous round. \nLet's begin. Type any word!") 
     
-    model = make_model() #define model
+    model = make_model() #define models
+    common_word_vectors = make_cwv()
     
     while True: 
         user_response = input().lower()
@@ -101,6 +108,7 @@ def play_convergence(round_results=None):
                               print(f"Remember, don't repeat what you said: {user_history} or what I said: {bot_history}")
                     else:
                         print(f"CONVERGENCE!!!! WE BOTH said {user_response}!!! WE GOT CONVERGENCE!!!!")
-                        break   
+                        break  
                               
-play_convergence()
+if __name__ == '__main__':  #if someone runs directly (in any way that it's called with python)                            
+    play_convergence()
