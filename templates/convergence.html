@@ -23,7 +23,6 @@
      
       <!-- Custom styles for this template -->
       <link href="css/agency.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     </head>
     
     <body id="page-top" onload="brython(1)">
@@ -73,16 +72,14 @@
   
 
             document["play_button"].bind("click", play_round)
+            document["play_button"].bind("keydown", play_round)
           </script>
           
           <script type="javascript">
-              $("#play_button").keypress(function(e) {
-                  if(e.which == 13) {
-                      play_round();
-                  }
-              });
-              $("#play_button").click(function() {
-                play_round();
+              document.addEventListener("keydown", (evt)  => {
+                if  (evt.keyCode === 13) {
+                  playRound()
+                } 
               })
             </script>
     
