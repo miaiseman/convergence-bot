@@ -49,22 +49,20 @@ def play_round(model, common_word_vectors, user_input, user_history=None, bot_hi
         bot_history = []
         bot_response = random.choice(list(common_word_vectors.keys()))
     else:
-        bot_response = converge(model, common_word_vectors, user_history[-1], bot_history[-1], 
-                                exclude=set(user_history + bot_history))
+        if user_input in bot_history or user_input in user_history:
+            return {'error': f"No repeats! One of us already said {user_input}. Choose a different word."}
+        else: 
+            bot_response = converge(model, common_word_vectors, 
+                                    user_history[-1], bot_history[-1],
+                                    exclude=set(user_history + bot_history))
     user_history.append(user_input)
     bot_history.append(bot_response)
     return {
         'user_history': user_history,
         'bot_history': bot_history,
-        'bot_response': bot_response,
-        
-    }
+        'bot_response': bot_response,}
 
-
-#^^ add error dictionaries for logic below 
-#
-
-#can look at this later 
+#can look at this later to make sure it runs in terminal
 def play_convergence(round_results=None):
     """Play a game of Convergence."""
     print("Let's play Convergence! \nThe game starts with two random words - "

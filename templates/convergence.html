@@ -26,7 +26,13 @@
     </head>
     
     <body id="page-top" onload="brython(1)">
-    
+    <script type="javascript">
+            document.addEventListener("keydown", (evt)  => {
+              if  (evt.keyCode === 13) {
+                playRound()
+              } 
+            })
+    </script>
     <script type="text/python3">
             from browser import document, ajax
             import json
@@ -48,13 +54,11 @@
               else:
                 document['error'].html = ''
               if document['user_input'].value == data['bot_response']:
-                document['bot_response'].html = "Convergence!" #img source in html code  
+                document['bot_response'].html = "CONVERGENCE!" #img source in html code  
 
               else:
                 document["bot_response"].html = data['bot_response']
               document['history'].html = response.text
-              
-                
 
       
             def play_round(ev):
@@ -75,25 +79,18 @@
             document["play_button"].bind("keydown", play_round)
           </script>
           
-          <script type="javascript">
-              document.addEventListener("keydown", (evt)  => {
-                if  (evt.keyCode === 13) {
-                  playRound()
-                } 
-              })
-            </script>
     
          <!-- Header -->
       <header class="masthead">
       <div class="container">
         <div class="intro-text">
           <div class="intro-heading text-center">Can we converge on the same word?</div>
-          <div id="error" style="color:red"></div>
+          <div id="error" style="color:rgb(199, 105, 105)"></div>
         <input color=gray id="user_input"></input>
           <p></p>
           <div class="btn btn-primary btn-xl text-lowercase" id="play_button">submit your word</div>
           <div class="intro-heading" id="bot_response"></div>
-          <div id="result"></div>
+          <div style="display:none" id="result"></div>
 </div>
       
       </div>
@@ -101,6 +98,7 @@
       
       </header>
     <div style="display:none" id="history">{"user_history": null, "bot_history": null}</div>
+   
 
 
 

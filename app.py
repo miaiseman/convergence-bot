@@ -1,4 +1,4 @@
-import convergence_resources as cr
+import convergence as cr
 from flask import Flask, request, render_template, jsonify
 
 model = cr.make_model()
