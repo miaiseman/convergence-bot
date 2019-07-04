@@ -4,6 +4,10 @@ __pycache__/
 *$py.class
 __pycache__
 
+#files
+*.txt
+*.pkl
+
 # C extensions
 *.so
 
