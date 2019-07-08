@@ -1,0 +1,107 @@
+
+<html lang="es">
+
+    <head>
+    <script type="text/javascript" src="brython.js"></script>
+        <script type="text/javascript" src="brython_stdlib.js"></script>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="description" content="">
+      <meta name="author" content="">
+    
+      <title>CONVERGENCIA</title>
+    
+      <!-- Bootstrap core CSS -->
+      <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    
+      <!-- Custom fonts for this template -->
+      <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+      <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+      <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+      <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+      <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+     
+      <!-- Custom styles for this template -->
+      <link href="css/agency.css" rel="stylesheet">
+    </head>
+    
+    <body id="page-top" onload="brython(1)">
+    <script type="javascript">
+            document.addEventListener("keydown", (evt)  => {
+              if  (evt.keyCode === 13) {
+                playRound()
+              } 
+            })
+    </script>
+    <script type="text/python3">
+            from browser import document, ajax
+            import json
+            import warnings
+            user_history = None
+            bot_history = None 
+
+
+            def show_results(response):  # response coming from web server 
+              if response.status!=200:
+                warnings.warn(response.text)
+                return 
+              document["result"].html = response.text
+              data = json.loads(response.text)
+              if 'error' in data: 
+                document['error'].html = data['error']
+                return
+              else:
+                document['error'].html = ''
+              if document['user_input'].value == data['bot_response']:
+                document['bot_response'].html = "CONVERGENCIA!" #img source in html code  
+
+              else:
+                document["bot_response"].html = data['bot_response']
+              document['history'].html = response.text
+
+      
+            def play_round(ev):
+              """Play a round."""
+              req = ajax.ajax()
+              req.bind('complete', show_results)  # complete - when the response comes back from server, show the results
+              req.open('POST', '/play_round', True)
+              req.set_header('content-type','application/json')
+              user_input = document["user_input"].value  # document is the webpage and you look up things like in a dictionary, doc-object model 
+              history = json.loads(document['history'].html)
+              data = json.dumps({'user_input': user_input,
+                               'user_history': history['user_history'],
+                               'bot_history': history['bot_history']})
+              req.send(data)
+  
+
+            document["play_button"].bind("click", play_round)
+            document["play_button"].bind("keydown", play_round)
+          </script>
+          
+    
+         <!-- Header -->
+      <header class="masthead">
+      <div class="container">
+        <div class="intro-text">
+          <div class="intro-heading text-center">¿Podemos decir la misma palabra?</div>
+          <div id="error" style="color:rgb(199, 105, 105)"></div>
+        <input color=gray id="user_input"></input>
+          <p></p>
+          <div class="btn btn-primary btn-xl text-lowercase" id="play_button">entregar tu palabra</div>
+          <div class="intro-heading" id="bot_response"></div>
+          <div style="display:none" id="result"></div>
+</div>
+      
+      </div>
+                
+      
+      </header>
+    <div style="display:none" id="history">{"user_history": null, "bot_history": null}</div>
+   
+
+
+
+    </body>
+    
+    </html>
+    
