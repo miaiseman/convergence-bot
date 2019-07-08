@@ -2,8 +2,8 @@ from ..convergence import play_round
 from ..convergence import load_model
 from flask import Flask, request, render_template, jsonify
 
-model = load_model('pre_trained_model.pkl')
-common_word_vectors = load_model('common_word_vectors.pkl')
+model = load_model('./convergence/pre_trained_model.pkl')
+common_word_vectors = load_model('./convergence/common_word_vectors.pkl')
 
 app = Flask(__name__, static_url_path="")
 
