@@ -8,20 +8,20 @@ import pickle
 import os
 import requests
 
-def download_and_open(url, mode='rb', folder='convergence-bot'):
-    """Downloads the specified file if it isn't already downloaded, then opens it."""
-    filename = os.path.basename(url)
-    pathname = os.path.join(folder, filename)
-    if not os.path.exists(pathname):
-        response = requests.get(url)
-        with open(pathname, 'wb') as f:
-            f.write(response.content)
-    return open(pathname, mode)
+# def download_and_open(url, mode='rb', folder='data'):
+#     """Downloads the specified file if it isn't already downloaded, then opens it."""
+#     filename = os.path.basename(url)
+#     pathname = os.path.join(folder, filename)
+#     if not os.path.exists(pathname):
+#         response = requests.get(url)
+#         with open(pathname, 'wb') as f:
+#             f.write(response.content)
+#     return open(pathname, mode)
 
 
-def load_model(url):
+def load_model(filename):
     """Load any pickled model."""
-    unpickled_model = pickle.load(download_and_open(url, 'rb'))
+    unpickled_model = pickle.load(open(filename, 'rb'))
     return unpickled_model
 
 
