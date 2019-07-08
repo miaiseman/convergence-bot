@@ -1,8 +1,8 @@
 import convergence as cr
 from flask import Flask, request, render_template, jsonify
 
-model = cr.make_model()
-common_word_vectors = cr.make_cwv()
+model = cr.load_model('https://convergencerobot.s3-us-west-2.amazonaws.com/pre_trained_model.pkl')
+common_word_vectors = cr.load_model('https://convergencerobot.s3-us-west-2.amazonaws.com/common_word_vectors.pkl')
 
 app = Flask(__name__, static_url_path="")
 

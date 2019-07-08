@@ -5,22 +5,26 @@ from sklearn.metrics.pairwise import cosine_similarity
 import nltk
 from nltk.stem import WordNetLemmatizer
 import pickle
+import os
+import requests
 
-def load_model(filename):
+def download_and_open(url, mode='rb', folder='convergence-bot'):
+    """Downloads the specified file if it isn't already downloaded, then opens it."""
+    filename = os.path.basename(url)
+    pathname = os.path.join(folder, filename)
+    if not os.path.exists(pathname):
+        response = requests.get(url)
+        with open(pathname, 'wb') as f:
+            f.write(response.content)
+    return open(pathname, mode)
+
+
+def load_model(url):
     """Load any pickled model."""
-    any_model = pickle.load(open(filename, 'rb'))
-    return any_model
+    unpickled_model = pickle.load(download_and_open(url, 'rb'))
+    return unpickled_model
 
-def make_model():
-    """Make the pre-trained word vectors dictionary."""
-    model = load_model('pre_trained_model.pkl')
-    return model 
 
-def make_cwv():
-    """Make the bot's response word vectors dictionary."""
-    common_word_vectors = load_model('common_word_vectors.pkl')
-    return common_word_vectors
-  
 def converge(model, common_word_vectors, user_input, bot_input, exclude=None):
     """Return the "average word" of the input words."""
     
@@ -61,6 +65,7 @@ def play_round(model, common_word_vectors, user_input, user_history=None, bot_hi
         'user_history': user_history,
         'bot_history': bot_history,
         'bot_response': bot_response,}
+
 
 #can look at this later to make sure it runs in terminal
 def play_convergence(round_results=None):
@@ -107,6 +112,7 @@ def play_convergence(round_results=None):
                     else:
                         print(f"CONVERGENCE!!!! WE BOTH said {user_response}!!! WE GOT CONVERGENCE!!!!")
                         break  
+         
                               
 if __name__ == '__main__':  #if someone runs directly (in any way that it's called with python)                            
     play_convergence()
