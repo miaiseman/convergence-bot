@@ -14,11 +14,9 @@ def index():
 
 
 @app.route('/play_round', methods=['GET', 'POST'])
-def play_round():
+def play_a_single_round():
     """Play a round of Convergence."""
     params = request.json  # web browser will send these back as a dictionary when you click the button
     response = play_round(model=model, common_word_vectors=common_word_vectors, **params)  # what we send back (dict)
     return jsonify(response)  # flask version of json.dumps
-
-#need to reproduce logic from play_conergence
 

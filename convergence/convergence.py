@@ -2,21 +2,9 @@ import pandas as pd
 import numpy as np  
 import random 
 from sklearn.metrics.pairwise import cosine_similarity
-import nltk
-from nltk.stem import WordNetLemmatizer
 import pickle
 import os
 import requests
-
-# def download_and_open(url, mode='rb', folder='data'):
-#     """Downloads the specified file if it isn't already downloaded, then opens it."""
-#     filename = os.path.basename(url)
-#     pathname = os.path.join(folder, filename)
-#     if not os.path.exists(pathname):
-#         response = requests.get(url)
-#         with open(pathname, 'wb') as f:
-#             f.write(response.content)
-#     return open(pathname, mode)
 
 
 def load_model(filename):
