@@ -10,7 +10,7 @@ app = Flask(__name__, static_url_path="")
 @app.route('/') 
 def index():
     """Return the main page."""
-    return render_template('convergence.html')
+    return render_template('./convergence/templates/convergence.html')
 
 
 @app.route('/play_round', methods=['GET', 'POST'])
