@@ -33,8 +33,8 @@ def converge(model, common_word_vectors, user_input, bot_input, exclude=None):
 
 def play_round(model, common_word_vectors, user_input, user_history=None, bot_history=None):
     """Play a round of Convergence."""
-    user_input = user_input.lower()
-    if user_input not in model: # check for invalid word  
+    user_input = user_input.lower().strip().replace(' ', '')
+    if user_input not in model: 
         return {'error': f"Is {user_input} an English word? I don't know it. Choose a different word."}
     if bot_history is None:
         user_history = []
