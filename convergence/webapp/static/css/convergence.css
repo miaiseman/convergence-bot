@@ -3,6 +3,95 @@
  * Copyright 2013-2019 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-grayscale/blob/master/LICENSE)
  */
+ #myImg {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color:transparent; /* Fallback color */
+  background-color:transparent; /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+
+/* Caption of Modal Image */
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+/* Add Animation */
+.modal-content, #caption {  
+  -webkit-animation-name: zoom;
+  -webkit-animation-duration: 0.6s;
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+  from {-webkit-transform:scale(0)} 
+  to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+  from {transform:scale(0)} 
+  to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+  .modal-content {
+    width: 100%;
+  }
+}
+
+
+
+
 
 #mainNav {
   min-height: 56px;
@@ -89,12 +178,10 @@
 .masthead {
   position: relative;
   width: 100%;
-  height: auto;
+  height: 100%;
   min-height: 35rem;
-  padding: 5rem 0;
-  /* background: -webkit-gradient(linear, left top, left bottom, from(rgba(22, 22, 22, 0.3)), color-stop(25%, rgba(22, 22, 22, 0.7)), to(#161616)), url("../img/bg_1.png");
-  background: linear-gradient(to bottom, rgba(22, 22, 22, 0.3) 0%, rgba(22, 22, 22, 0.7) 50%, #06eca7 100%), url("../img/bg_1.png"); */
-  background-image: url("../img/bryan-garces-IXUM4cJynP0-unsplash.jpg");
+  padding: 2rem 0;
+  background-image: url("../img/abstract-art-artistic-2457274.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: scroll;
@@ -106,14 +193,15 @@
   font-size: 2.5rem;
   line-height: 2.5rem;
   letter-spacing: 0.8rem;
-  background: -webkit-linear-gradient(rgba(17, 16, 16, 0.9), rgba(10, 9, 9, 0));
+  background: -webkit-linear-gradient(rgb(0, 0, 0), rgba(0, 0, 0, 0.459));
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
 }
 
 .masthead h2 {
-  max-width: 20rem;
+  max-width: 50rem;
   font-size: 1rem;
+  color: black ;
 }
 
 @media (min-width: 768px) {
@@ -134,7 +222,7 @@
     letter-spacing: 0.8rem;
   }
   .masthead h2 {
-    max-width: 30rem;
+    min-width: 60rem;
     font-size: 1.25rem;
   }
 }
@@ -142,29 +230,30 @@
 .btn {
   -webkit-box-shadow: 0 0.1875rem 0.1875rem 0 rgba(0, 0, 0, 0.1) !important;
   box-shadow: 0 0.1875rem 0.1875rem 0 rgba(0, 0, 0, 0.1) !important;
-  padding: 1.25rem 2rem;
+  padding: .2rem 2rem;
   font-family: 'Varela Round';
-  font-size: 80%;
+  font-size: 75%;
   text-transform: uppercase;
   letter-spacing: .15rem;
   border: 0;
 }
 
 .btn-primary {
-  background-color: #64a19d;
+  background-color: #545a54;
+  size: .3rem;
 }
 
 .btn-primary:hover {
-  background-color: #4f837f;
+  background-color: #545a54;
 }
 
 .btn-primary:focus {
-  background-color: #4f837f;
+  background-color: #545a54
   color: white;
 }
 
 .btn-primary:active {
-  background-color: #467370 !important;
+  background-color: #545a54 !important;
 }
 
 .about-section {
@@ -232,6 +321,7 @@
 
 .contact-section {
   padding: 5rem 0 0;
+  background-color: transparent
 }
 
 .contact-section .card {
@@ -253,16 +343,16 @@
 }
 
 .contact-section .social {
-  margin-top: 5rem;
+  margin-top: 1rem;
 }
 
 .contact-section .social a {
   text-align: center;
-  height: 3rem;
-  width: 3rem;
+  min-height: 25rem;
+  min-width: 25rem;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 100%;
-  line-height: 3rem;
+  line-height: 5rem;
   color: rgba(255, 255, 255, 0.3);
 }
 
@@ -280,7 +370,7 @@ body {
 }
 
 a {
-  color: #64a19d;
+  color: #0cc00c;
 }
 
 a:focus, a:hover {
@@ -301,5 +391,5 @@ a:focus, a:hover {
 }
 
 footer {
-  padding: 5rem 0;
+  padding: 2rem 0;
 }
