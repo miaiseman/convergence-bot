@@ -51,6 +51,7 @@
       document['history'].html = response.text
       document['user_words'].html = '<br />'.join(data['user_history'])
       document['bot_words'].html = '<br />'.join(data['bot_history'])
+      document['user_last_word'].html = data['user_history'][-1]
 
 
     def play_round(ev):
@@ -92,35 +93,39 @@
 
       <div class="row">
 
+          <div class="col-md-4 mb-3 mb-md-0">
+              <div class="card py-4 h-100">
+                <div class="card-body text-center">
+                  <h4 class="text-uppercase m-0">Words you've said:</h4>
+                  <hr class="my-4"> 
+                  <div class="small text-black-50">
+                    <div id="user_words"></div>   </div>
+                  <hr class="my-4"> 
+              </div>
+              </div>
+            </div>
+
+
         <div class="col-md-4 mb-3 mb-md-0">
           <div class="card py-4 h-100">
             <div class="card-body text-center">
-              <i class="fas fa-map-marked-alt text-primary mb-2"></i>
-               <h4 class="text-uppercase m-0">Your word:</h4>
+               <h4 class="text-uppercase m-0">Enter your word:</h4>
                <hr class="my-4">   
                
-                   <input class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="user_input" placeholder="Enter your word...">
+                   <input class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="user_input" placeholder="your word here...">
                     <button type="submit" class="btn btn-primary mx-auto" id="play_button">Submit your word</button>
               
                         <div id="error"></div>
               <h4 class="text-uppercase m-0">My word:</h4>
-              <h3> <div class="my-4" id="bot_response"></div></h3>
+              <h4> <div class="my-4" id="bot_response"></div></h3>
+              <h4 class="text-uppercase m-0">Your word:</h4>
+              <h4> <div class="my-4" id="user_last_word"></div></h3>
+              <h5 class="text-uppercase m-0">what's the convergence?</h5>
           <div style="display:none" id="result"></div>
           <div style="display:none" id="history">{"user_history": null, "bot_history": null}</div>
 
 
               
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4 mb-3 mb-md-0">
-          <div class="card py-4 h-100">
-            <div class="card-body text-center">
-              <h4 class="text-uppercase m-0">Words you've said:</h4>
-              <hr class="my-4">
-              <div class="small text-black-50">
-                <div id="user_words"></div>   </div>
             </div>
           </div>
         </div>
