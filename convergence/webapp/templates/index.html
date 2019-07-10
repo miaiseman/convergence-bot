@@ -44,14 +44,16 @@
       else:
         document['error'].html = ''
       if document['user_input'].value == data['bot_response']:
-        document['bot_response'].html = "CONVERGENCE!" #img source in html code  
+        document['convergence_alert'].html = '<img src="img/converged.png" alt="Congrats, you!" display="block" width="100%" height="auto">' 
+        document['bot_response'].html = data['bot_response'] 
 
       else:
         document["bot_response"].html = data['bot_response']
       document['history'].html = response.text
-      document['user_words'].html = '<br />'.join(data['user_history'])
-      document['bot_words'].html = '<br />'.join(data['bot_history'])
+      document['user_words'].html = '<br />'.join(list(reversed(data['user_history'])))
+      document['bot_words'].html = '<br />'.join(list(reversed(data['bot_history'])))
       document['user_last_word'].html = data['user_history'][-1]
+      document['user_input'].value = ""
 
 
     def play_round(ev):
@@ -82,13 +84,13 @@
     <div class="container d-flex h-100 align-items-center">
       <div class="mx-auto text-center">
         <h1 class="mx-auto my-0 text-uppercase">Convergence</h1>
-        <h2 class="text-white-50 mx-auto mt-2 mb-5" color="white">This is a game where we try to read each other's minds. We each start with a random word, then see how long it takes before we converge upon the same word. Remember, don't repeat any words from the previous rounds.</h2>
+        <h2 class="mx-auto mt-2 mb-4" color="black">This is a game where we try to read each other's minds. We each start with a random word, then see how long it takes before we converge upon the same word. Remember, don't repeat any words from the previous rounds.</h2>
       </div>
     </div>
   <!-- </header> -->
 
   <!-- Contact Section -->
-  <section class="contact-section bg-black">
+  <!-- <section class="contact-section bg-black"> -->
     <div class="container">
 
       <div class="row">
@@ -96,11 +98,11 @@
           <div class="col-md-4 mb-3 mb-md-0">
               <div class="card py-4 h-100">
                 <div class="card-body text-center">
-                  <h4 class="text-uppercase m-0">Words you've said:</h4>
-                  <hr class="my-4"> 
+                  <h5 class="text-uppercase m-0">You said:</h5>
+                  <hr class="my-3" color="#c9cc21"> 
                   <div class="small text-black-50">
                     <div id="user_words"></div>   </div>
-                  <hr class="my-4"> 
+                    <hr class="my-3" color="#c9cc21">
               </div>
               </div>
             </div>
@@ -109,23 +111,20 @@
         <div class="col-md-4 mb-3 mb-md-0">
           <div class="card py-4 h-100">
             <div class="card-body text-center">
-               <h4 class="text-uppercase m-0">Enter your word:</h4>
-               <hr class="my-4">   
-               
-                   <input class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="user_input" placeholder="your word here...">
-                    <button type="submit" class="btn btn-primary mx-auto" id="play_button">Submit your word</button>
-              
+               <h5 class="text-uppercase m-1">enter a word:</h5>
+                   <input class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="user_input" onfocus="this.value=''">
+                    <button type="submit" class="btn btn-primary small mx-auto" id="play_button">Submit</button>
                         <div id="error"></div>
-              <h4 class="text-uppercase m-0">My word:</h4>
-              <h4> <div class="my-4" id="bot_response"></div></h3>
-              <h4 class="text-uppercase m-0">Your word:</h4>
-              <h4> <div class="my-4" id="user_last_word"></div></h3>
-              <h5 class="text-uppercase m-0">what's the convergence?</h5>
+                        <div id="convergence_alert"></div>
+                        <hr class="my-3" color="#0cc00c"> 
+              <h6 class="text-uppercase m-0">My word:</h6>
+              <h4> <div id="bot_response"></div></h4>
+              <h6 class="text-uppercase m-0">Your word:</h6>
+              <h4> <div id="user_last_word"></div></h4>
+              <h6 class="small text-black-50">What's the convergence of those two words?</h6>
+              <hr class="my-3" color="#0cc00c">
           <div style="display:none" id="result"></div>
           <div style="display:none" id="history">{"user_history": null, "bot_history": null}</div>
-
-
-              
             </div>
           </div>
         </div>
@@ -133,35 +132,40 @@
         <div class="col-md-4 mb-3 mb-md-0">
           <div class="card py-4 h-100">
             <div class="card-body text-center">
-              <h4 class="text-uppercase m-0">Words I've said:</h4>
-              <hr class="my-4">
+              <h5 class="text-uppercase m-0">I said:</h5>
+              <hr class="my-3" color="#17afc4">
               <div class="small text-black-50">
-                  <div id="bot_words"></div>      </div>
+                  <div id="bot_words"></div> 
+                  <hr class="my-3" color="#17afc4">     </div>
             </div>
           </div>
         </div>
       </div>
-
-      <div class="social d-flex justify-content-center">
-        <a href="https://twitter.com/MiaIseman" class="mx-2">
-          <i class="fab fa-twitter"></i>
-        </a>
-        <a href="https://www.facebook.com/mia.iseman" class="mx-2">
-          <i class="fab fa-facebook-f"></i>
-        </a>
-        <a href="https://github.com/MIAISEMAN/convergence-bot/tree/master/convergence" class="mx-2">
-          <i class="fab fa-github"></i>
-        </a>
-      </div>
-
     </div>
-  </section>
+
+    
+  <!-- </section> -->
 </header>
   <!-- Footer -->
-  <footer class="bg-black small text-center text-white-50">
+  <footer class="bg-black large text-center text-white-50" >
+    
+    <div class="social d-flex justify-content-center">
+      <a href="https://www.linkedin.com/in/miaiseman/" class="mx-2">
+        <i class="fab fa-linkedin"></i>
+      </a>
+      <a href="https://medium.com/@mia.iseman" class="mx-2">
+        <i class="fab fa-medium"></i>
+      </a>
+      <a href="https://github.com/MIAISEMAN/convergence-bot/tree/master/convergence" class="mx-2">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+
+  
     <div class="container">
       Copyright &copy; Mia Iseman 2019
     </div>
+  <div style="text-align:right;font-size:7px;font-style: italic;color: #555252">Photo by Anni Roenkae from Pexels</div>
   </footer>
 
   <!-- Bootstrap core JavaScript -->
