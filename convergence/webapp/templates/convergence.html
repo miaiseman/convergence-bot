@@ -73,10 +73,15 @@
                                'user_history': history['user_history'],
                                'bot_history': history['bot_history']})
               req.send(data)
-  
+            
+            def check_enter(ev):
+              """Play a round if user presses enter."""
+              if ev.keyCode == 13:
+                play_round(ev)
+
 
             document["play_button"].bind("click", play_round)
-            document["play_button"].bind("keydown", play_round)
+            document["user_input"].bind("keydown", check_enter)
           </script>
           
     
