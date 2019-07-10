@@ -53,7 +53,7 @@ def play_round(sbw_model, pcv_model, user_input, user_history=None, bot_history=
 #to run locally:
 def juega(round_results=None):
     """Play a game of Convergence."""
-    print("!Vamos a jugar Convergencia! Escoja quisiera palabra española para empezar.") 
+    print("!Vamos a jugar Convergencia! Escoja qualquiera palabra española para empezar.") 
     
     sbw_model = load_model('sbw_model.pkl')
     pcv_model = load_model('pal_com_vectores.pkl')
@@ -71,8 +71,8 @@ def juega(round_results=None):
                 
                 #first round convergence will basically never happen, but just in case: 
                 if user_response != round_results['bot_response']:
-                    print(f"Dijiste {user_response}, pero dijo {round_results['bot_response']}.")
-                    print(f"Qué es la convergencia de {user_response} y {round_results['bot_response']}?")   
+                    print(f"Dijiste {user_response}, pero dijé{round_results['bot_response']}.")
+                    print(f"Quál es la convergencia entre {user_response} y {round_results['bot_response']}?")   
                 else:
                     print(f"CONVERGENCIA!!!! NOSOTR@S DOS DIJIMOS {user_response}!!! CONVERGENCIA!!!!")
                     break              
@@ -86,8 +86,8 @@ def juega(round_results=None):
                 else: #valid new word 
                     round_results = play_round(sbw_model, pcv_model, user_response, user_history, bot_history)    
                     if user_response != round_results['bot_response']:
-                        print(f"Dijiste {user_response}, pero dijo {round_results['bot_response']}.")
-                        print(f"Qué es la convergencia de {user_response} y {round_results['bot_response']}?")   
+                        print(f"Dijiste {user_response}, pero dijé {round_results['bot_response']}.")
+                        print(f"Quál es la convergencia de {user_response} y {round_results['bot_response']}?")   
                         if len(round_results['bot_history'])>1:
                               print(f"Recuerda, no repita lo que has dicho: {user_history} ni lo que he dicho: {bot_history}")
                     else:
