@@ -1,113 +1,182 @@
-
+<!DOCTYPE html>
 <html lang="en">
 
-    <head>
-    <script type="text/javascript" src="brython.js"></script>
-        <script type="text/javascript" src="brython_stdlib.js"></script>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <meta name="description" content="">
-      <meta name="author" content="">
-    
-      <title>Convergence Game</title>
-    
-      <!-- Bootstrap core CSS -->
-      <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    
-      <!-- Custom fonts for this template -->
-      <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-      <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-      <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
-      <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-      <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
-     
-      <!-- Custom styles for this template -->
-      <link href="css/agency.css" rel="stylesheet">
-    </head>
-    
-    <body id="page-top" onload="brython(1)">
-    <script type="javascript">
-            document.addEventListener("keydown", (evt)  => {
-              if  (evt.keyCode === 13) {
-                playRound()
-              } 
-            })
-    </script>
-    <script type="text/python3">
-            from browser import document, ajax
-            import json
-            import warnings
-            user_history = None
-            bot_history = None
-            #need a box where you type something and a box for responses 
+<head>
+  <script type="text/javascript" src="brython.js"></script>
+  <script type="text/javascript" src="brython_stdlib.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Play Convergence!</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="css/convergence.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+</head>
+
+<body id="page-top" onload="brython(1)">
+  <script type="text/python3">
+    from browser import document, ajax
+    import json
+    import warnings
+    user_history = None
+    bot_history = None
+    #need a box where you type something and a box for responses 
 
 
-            def show_results(response):  # response coming from web server 
-              if response.status!=200:
-                warnings.warn(response.text)
-                return 
-              document["result"].html = response.text
-              data = json.loads(response.text)
-              if 'error' in data: 
-                document['error'].html = data['error']
-                return
-              else:
-                document['error'].html = ''
-              if document['user_input'].value == data['bot_response']:
-                document['bot_response'].html = "CONVERGENCE!" #img source in html code  
+    def show_results(response):  # response coming from web server 
+      if response.status!=200:
+        warnings.warn(response.text)
+        return 
+      document["result"].html = response.text
+      data = json.loads(response.text)
+      if 'error' in data: 
+        document['error'].html = data['error']
+        return
+      else:
+        document['error'].html = ''
+      if document['user_input'].value == data['bot_response']:
+        document['convergence_alert'].html = '<img src="img/converged.png" alt="Congrats, you!" display="block" width="100%" height="auto">' 
+        document['bot_response'].html = data['bot_response'] 
 
-              else:
-                document["bot_response"].html = data['bot_response']
-              document['history'].html = response.text
-
-      
-            def play_round(ev):
-              """Play a round."""
-              req = ajax.ajax()
-              req.bind('complete', show_results)  # complete - when the response comes back from server, show the results
-              req.open('POST', '/play_round', True)
-              req.set_header('content-type','application/json')
-              user_input = document["user_input"].value  # document is the webpage and you look up things like in a dictionary, doc-object model 
-              history = json.loads(document['history'].html)
-              data = json.dumps({'user_input': user_input,
-                               'user_history': history['user_history'],
-                               'bot_history': history['bot_history']})
-              req.send(data)
-            
-            def check_enter(ev):
-              """Play a round if user presses enter."""
-              if ev.keyCode == 13:
-                play_round(ev)
+      else:
+        document["bot_response"].html = data['bot_response']
+      document['history'].html = response.text
+      document['user_words'].html = '<br />'.join(list(reversed(data['user_history'])))
+      document['bot_words'].html = '<br />'.join(list(reversed(data['bot_history'])))
+      document['user_last_word'].html = data['user_history'][-1]
+      document['user_input'].value = ""
 
 
-            document["play_button"].bind("click", play_round)
-            document["user_input"].bind("keydown", check_enter)
-          </script>
-          
-    
-         <!-- Header -->
-      <header class="masthead">
-      <div class="container">
-        <div class="intro-text">
-          <div class="intro-heading text-center">Can we converge on the same word?</div>
-          <div id="error" style="color:rgb(199, 105, 105)"></div>
-        <input color=blue id="user_input"></input>
-          <p></p>
-          <div class="btn btn-primary btn-xl text-lowercase" id="play_button">submit your word</div>
-          <div class="intro-heading" id="bot_response"></div>
-          <div style="display:none" id="result"></div>
-</div>
-      
+    def play_round(ev):
+      """Play a round."""
+      req = ajax.ajax()
+      req.bind('complete', show_results)  # complete - when the response comes back from server, show the results
+      req.open('POST', '/play_round', True)
+      req.set_header('content-type','application/json')
+      user_input = document["user_input"].value  # document is the webpage and you look up things like in a dictionary, doc-object model 
+      history = json.loads(document['history'].html)
+      data = json.dumps({'user_input': user_input,
+                       'user_history': history['user_history'],
+                       'bot_history': history['bot_history']})
+      req.send(data)
+
+    def check_enter(ev):
+      """Play a round if user presses enter."""
+      if ev.keyCode == 13:
+        play_round(ev)
+
+
+    document["play_button"].bind("click", play_round)
+    document["user_input"].bind("keypress", check_enter)
+  </script>
+
+  <!-- Header -->
+  <header class="masthead">
+    <div class="container d-flex h-100 align-items-center">
+      <div class="mx-auto text-center">
+        <h1 class="mx-auto my-0 text-uppercase">Convergence</h1>
+        <h2 class="mx-auto mt-2 mb-4" color="black">This is a game where we try to read each other's minds. We each start with a random word, then see how long it takes before we converge upon the same word. Remember, don't repeat any words from the previous rounds.</h2>
       </div>
-                
-      
-      </header>
-    <div style="display:none" id="history">{"user_history": null, "bot_history": null}</div>
-   
+    </div>
+  <!-- </header> -->
+
+  <!-- Contact Section -->
+  <!-- <section class="contact-section bg-black"> -->
+    <div class="container">
+
+      <div class="row">
+
+          <div class="col-md-4 mb-3 mb-md-0">
+              <div class="card py-4 h-100">
+                <div class="card-body text-center">
+                  <h5 class="text-uppercase m-0">You said:</h5>
+                  <hr class="my-3" color="#c9cc21"> 
+                  <div class="small text-black-50">
+                    <div id="user_words"></div>   </div>
+                    <hr class="my-3" color="#c9cc21">
+              </div>
+              </div>
+            </div>
 
 
+        <div class="col-md-4 mb-3 mb-md-0">
+          <div class="card py-4 h-100">
+            <div class="card-body text-center">
+               <h5 class="text-uppercase m-1">enter a word:</h5>
+                   <input class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="user_input" onfocus="this.value=''">
+                    <button type="submit" class="btn btn-primary small mx-auto" id="play_button">Submit</button>
+                        <div id="error"></div>
+                        <div id="convergence_alert"></div>
+                        <hr class="my-3" color="#0cc00c"> 
+              <h6 class="text-uppercase m-0">My word:</h6>
+              <h4> <div id="bot_response"></div></h4>
+              <h6 class="text-uppercase m-0">Your word:</h6>
+              <h4> <div id="user_last_word"></div></h4>
+              <h6 class="small text-black-50">What's the convergence of those two words?</h6>
+              <hr class="my-3" color="#0cc00c">
+          <div style="display:none" id="result"></div>
+          <div style="display:none" id="history">{"user_history": null, "bot_history": null}</div>
+            </div>
+          </div>
+        </div>
 
-    </body>
+        <div class="col-md-4 mb-3 mb-md-0">
+          <div class="card py-4 h-100">
+            <div class="card-body text-center">
+              <h5 class="text-uppercase m-0">I said:</h5>
+              <hr class="my-3" color="#17afc4">
+              <div class="small text-black-50">
+                  <div id="bot_words"></div> 
+                  <hr class="my-3" color="#17afc4">     </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     
-    </html>
+  <!-- </section> -->
+</header>
+  <!-- Footer -->
+  <footer class="bg-black large text-center text-white-50" >
     
+    <div class="social d-flex justify-content-center">
+      <a href="https://www.linkedin.com/in/miaiseman/" class="mx-2">
+        <i class="fab fa-linkedin"></i>
+      </a>
+      <a href="https://medium.com/@mia.iseman" class="mx-2">
+        <i class="fab fa-medium"></i>
+      </a>
+      <a href="https://github.com/MIAISEMAN/convergence-bot/tree/master/convergence" class="mx-2">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+
+  
+    <div class="container">
+      Copyright &copy; Mia Iseman 2019
+    </div>
+  <div style="text-align:right;font-size:7px;font-style: italic;color: #555252">Photo by Anni Roenkae from Pexels</div>
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+
+
+</body>
+
+</html>
