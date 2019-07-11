@@ -29,7 +29,7 @@ The unofficial, anecdotal reviews have been positive. I wasn't able to get more 
 
 ##Deployment
 ### Current: 
-The English game is live at <a href="www.playconvergence.com">www.playconvergence.com</a>! It is deployed on an EC2, and I used the <a href="https://startbootstrap.com/themes/grayscale/">Grayscale bootstrap template</a> to make it real pretty. 
+The English game is live at <a href="http://www.playconvergence.com">www.playconvergence.com</a>! It is deployed on an EC2, and I used the <a href="https://startbootstrap.com/themes/grayscale/">Grayscale bootstrap template</a> to make it real pretty. 
 
 The Spanish can be played from the terminal! ($ python convergence_esp.py from that directory)
 
