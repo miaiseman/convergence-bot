@@ -1,6 +1,6 @@
-<img src="./convergence/webapp⁩/static⁩/⁨img/title.png⁩" style="align:center"> 
+<img src="convergence/webapp/static/img/title.png">
 
-People need to play more, especially adults. Convergence, also called Mindmeld, is a popular game among certain groups- especially improvisors- though it is not yet well-known to the general public. The bot allows people to play the game when no one else is around, creating joy and popularizing a game whose main goal is to get people to be on the same page. 
+People should have more fun! Convergence, also called Mindmeld, is a popular game among certain groups- especially improvisors- though it is not yet well-known to the general public. The bot allows people to play the game when no one else is around, creating joy and popularizing a game whose main goal is to get people to be on the same page. 
 
 ## Understanding the Data
 The model utilizes pre-trained word vectors from <a href="https://catalog.ldc.upenn.edu/LDC2011T07">Gigawords</a> and <a href="https://dumps.wikimedia.org/backup-index.html">2014 Wikimedia dumps</a>. I preferred to use this corpora of text rather than Twitter or some other scholarly articles source since it seems to be a sweet spot in the middle of how people might quickly associate words but also not too dimwitted. 
