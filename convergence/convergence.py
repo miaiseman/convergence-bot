@@ -3,8 +3,6 @@ import numpy as np
 import random 
 from sklearn.metrics.pairwise import cosine_similarity
 import pickle
-import os
-import requests
 
 
 def load_model(filename):
