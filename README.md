@@ -1,4 +1,5 @@
-![](convergence/webapp⁩/static⁩/⁨img/title.png⁩)  
+<img src="./convergence/webapp⁩/static⁩/⁨img/title.png⁩" style="align:center"> 
+
 People need to play more, especially adults. Convergence, also called Mindmeld, is a popular game among certain groups- especially improvisors- though it is not yet well-known to the general public. The bot allows people to play the game when no one else is around, creating joy and popularizing a game whose main goal is to get people to be on the same page. 
 
 ## Understanding the Data
