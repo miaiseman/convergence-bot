@@ -83,8 +83,8 @@
   <header class="masthead">
     <div class="container d-flex h-100 align-items-center">
       <div class="mx-auto text-center">
-        <h1 class="mx-auto my-0 text-uppercase">Convergence</h1>
-        <h2 class="mx-auto mt-2 mb-4" color="black">This is a game where we try to read each other's minds. We each start with a random word, then see how long it takes before we converge upon the same word. Remember, don't repeat any words from the previous rounds.</h2>
+        <h1 class="mx-auto d-flex my-0 text-uppercase">Convergence</h1>
+        <h2 class="mx-auto d-flex mt-2 mb-4" color="black">This is a game where we try to read each other's minds. We each start with a random word, then see how long it takes before we converge upon the same word. Remember, don't repeat any words from the previous rounds.</h2>
       </div>
     </div>
   <!-- </header> -->
@@ -98,9 +98,9 @@
           <div class="col-md-4 mb-3 mb-md-0">
               <div class="card py-4 h-100">
                 <div class="card-body text-center">
-                  <h5 class="text-uppercase m-0">You said:</h5>
+                  <h4 class="text-uppercase m-0">You said:</h4>
                   <hr class="my-3" color="#c9cc21"> 
-                  <div class="small text-black-50">
+                  <div class="medium text-black-50">
                     <div id="user_words"></div>   </div>
                     <hr class="my-3" color="#c9cc21">
               </div>
@@ -111,17 +111,17 @@
         <div class="col-md-4 mb-3 mb-md-0">
           <div class="card py-4 h-100">
             <div class="card-body text-center">
-               <h5 class="text-uppercase m-1">enter a word:</h5>
+               <h4 class="text-uppercase m-1">enter a word:</h4>
                    <input class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="user_input" onfocus="this.value=''">
                     <button type="submit" class="btn btn-primary small mx-auto" id="play_button">Submit</button>
-                        <div id="error"></div>
+                        <div id="error" style="color:#bd3983"></div>
                         <div id="convergence_alert"></div>
                         <hr class="my-3" color="#0cc00c"> 
-              <h6 class="text-uppercase m-0">My word:</h6>
-              <h4> <div id="bot_response"></div></h4>
-              <h6 class="text-uppercase m-0">Your word:</h6>
-              <h4> <div id="user_last_word"></div></h4>
-              <h6 class="small text-black-50">What's the convergence of those two words?</h6>
+              <h5 class="text-uppercase m-0">My word:</h5>
+              <h3> <div id="bot_response"></div></h3>
+              <h5 class="text-uppercase m-0">Your word:</h5>
+              <h3> <div id="user_last_word"></div></h3>
+              <h5 class="medium text-black-50">What's the convergence of those two words?</h5>
               <hr class="my-3" color="#0cc00c">
           <div style="display:none" id="result"></div>
           <div style="display:none" id="history">{"user_history": null, "bot_history": null}</div>
@@ -132,9 +132,9 @@
         <div class="col-md-4 mb-3 mb-md-0">
           <div class="card py-4 h-100">
             <div class="card-body text-center">
-              <h5 class="text-uppercase m-0">I said:</h5>
+              <h4 class="text-uppercase m-0">I said:</h4>
               <hr class="my-3" color="#17afc4">
-              <div class="small text-black-50">
+              <div class="medium text-black-50">
                   <div id="bot_words"></div> 
                   <hr class="my-3" color="#17afc4">     </div>
             </div>
