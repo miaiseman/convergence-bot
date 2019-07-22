@@ -191,18 +191,20 @@
 .masthead h1 {
   font-family: 'Varela Round';
   font-size: 5rem;
-  line-height: 2.5rem;
+  line-height: 3rem;
   padding: 1rem; 
-  letter-spacing: 0.8rem;
+  letter-spacing: .8rem;
   background: -webkit-linear-gradient(rgb(0, 0, 0), rgba(0, 0, 0, 0.459));
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
+  word-wrap: break-word
 }
 
 .masthead h2 {
   max-width: 50rem;
   font-size: 1.5rem;
   color: black ;
+  display:-webkit-flex
 }
 
 /* @media (min-width: 768px) {
