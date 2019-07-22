@@ -3,12 +3,12 @@
 People should have more fun! Convergence, also called Mindmeld, is a popular game among certain groups- especially improvisors- though it is not yet well-known to the general public. The bot allows people to play the game when no one else is around, creating joy and popularizing a game whose main goal is to get people to be on the same page. 
 
 ## Understanding the Data
-The model utilizes pre-trained word vectors from <a href="https://catalog.ldc.upenn.edu/LDC2011T07">Gigawords</a> and <a href="https://dumps.wikimedia.org/backup-index.html">2014 Wikimedia dumps</a>. I preferred to use this corpora of text rather than Twitter or some other scholarly articles source since it seems to be a sweet spot in the middle of how people might quickly associate words but also not too dimwitted. 
+The model utilizes pre-trained word vectors from <a href="https://catalog.ldc.upenn.edu/LDC2011T07">Gigawords</a> and <a href="https://dumps.wikimedia.org/backup-index.html">2014 Wikimedia dumps</a>. I preferred to use this corpora of text rather than Twitter or some other scholarly article source since it's a sweet spot for how people might quickly associate words without being too simple. 
 
 It's important to note that I could train (or even "brand") this bot in any way I wanted  simply by limiting the vocabulary, just like what I did in the <a href="https://github.com/MIAISEMAN/convergence-bot/blob/master/convergence/espanol/espanol_notebook.ipynb">Spanish notebook</a>. Thus, to understand the data, you have to understand who will be playing the game and why. In my preliminary case, anyone who speaks English will be playing for fun and to satisfy their curiosity.  
 
 ## Data Preparation and Modeling
-To reproduce how I prepared the data for modeling, please see <a href="https://github.com/MIAISEMAN/convergence-bot/blob/master/convergence_notebook.ipynb">my Jupyter Notebook</a>. 
+I took the common words and lemmatized them, and then I mapped the vectors from the 400,000 words to the common words. Some of the common words, because the internet was the source, were spelled wrong or not within the 400,000 word corpus, so those ones were removed. For technical details on how I prepared the data for modeling, see the convergence_notebook.ipynb file. 
 
 The game's functions are contained in the convergence.py file. It operates on just two functions. The third function is just a wrapper to play the game in the terminal instead of online. 
 
