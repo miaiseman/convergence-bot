@@ -20,14 +20,14 @@ In short:
 4) If there is a match, convergence! Game over! 
 5) If there's no match, repeat the process until there is.
  
-##Evaluation
+## Evaluation
 The unofficial, anecdotal reviews have been positive. I wasn't able to get more than 10 people to record their interactions with the game. I have a few improvements I would make in the future: 
  
 * It would be great to incorporate the input “answers” from the other player immediately into the corpus of text. That way, if after many rounds, a person has answered “dog” several more times than “puppy,” the computer will give a preference to dog instead of puppy in the future, where it makes sense.  
 * I don't want my bot to start with any of the smaller words. Rather than limiting the bot's response, since these are supposedly the top 8000 most commonly used words, I am going to limit my bot's initial "random" response to be within the first 2000 common words to avoid weird starts to the game.  
 * Technically, the game should be played with all words available as options, but since people will not often go through every lemma/stem/conjugation of a word before they change ideas or paths, I would like my bot to do the same thing. The lemmatization didn't seem to be as effective as I would like. I'd love to revisit this aspect in the future. Perhaps the bot could even have phrases in its vocabulary and common words as well, so that "soccer" and "woman" could converge to "Megan Rapinoe" or something along those lines.
 
-##Deployment
+## Deployment
 ### Current: 
 The English game is live at <a href="http://www.playconvergence.com">www.playconvergence.com</a>! It is deployed on an EC2, and I used the <a href="https://startbootstrap.com/themes/grayscale/">Grayscale bootstrap template</a> to make it real pretty. 
 
