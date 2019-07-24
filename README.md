@@ -30,7 +30,7 @@ When deciding on the "average" word, the bot takes the average of those two vect
 Then, the bot locates the closest common word to that vector. In this case, maybe it's the word "father." 
 <img src="convergence/webapp/static/img/chart3.png">
 
-If you also chose the word father, then you'll converge! If not, the process will repeat with your new words. 
+Remember, in this example, I chose two dimensions so we could visualize and imagine the words being associated with the ideas of family and religion that are easy enough to understand. However, the actual bot utilizes 300 dimensions - just a bit harder to visualize and harder to understand what all those ideas are! 
 
 ## Evaluation
 The unofficial, anecdotal reviews have been positive. I wasn't able to get more than 10 people to record their interactions with the game. I have a few improvements I might make in the future: 
